@@ -1,0 +1,43 @@
+# pro生产环境
+
+carry:
+  name: SpringBoot
+  version: 2.2.6
+
+# 开发环境基本配置
+server:
+  port: 80
+  servlet:
+    # 项目访问路径 http://127.0.0.1:80/
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+
+
+# Spring 配置
+
+# Web资源路径
+# static-locations: classpath:templates/ 设置web资源路径
+# static-path-pattern: /static/** 用来规定访问静态文件的路径格式
+spring:
+  resources:
+    static-locations: classpath:templates/
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+    static-path-pattern: /static/**
+  #数据库连接池
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demodb?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    filters: stat,wall     #druid监控配置
+    dbcp2:
+      min-idle: 5       #数据库连接池的最小维持连接数
+      initial-size: 5     #初始化提供的连接数
+      max-total: 5          #最大的连接数
+      max-wait-millis: 200        #等待连接获取的最大超时时间
