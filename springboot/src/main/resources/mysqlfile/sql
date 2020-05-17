@@ -1,0 +1,9 @@
+-- springbootdb
+CREATE TABLE `springbootdb`.`user`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(50) NOT NULL,
+  `pass_word` VARCHAR(50) NOT NULL,
+  `status` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB CHARSET=utf8 COLLATE=utf8_bin;
+

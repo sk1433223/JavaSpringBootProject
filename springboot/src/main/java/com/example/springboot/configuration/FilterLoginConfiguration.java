@@ -1,8 +1,9 @@
 package com.example.springboot.configuration;
 
+import com.example.springboot.web.CacheFilter;
+import com.example.springboot.web.IsLoginFilter;
 import com.example.springboot.web.LoginFilter;
 import com.example.springboot.web.WebFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,17 @@ public class FilterLoginConfiguration {
 
     private final LoginFilter loginFilter;
 
+    private final IsLoginFilter isLoginFilter;
+
     private final WebFilter webFilter;
 
-    public FilterLoginConfiguration(LoginFilter loginFilter, WebFilter webFilter) {
+    private final CacheFilter cacheFilter;
+
+    public FilterLoginConfiguration(LoginFilter loginFilter,IsLoginFilter isLoginFilter, WebFilter webFilter,CacheFilter cacheFilter) {
         this.loginFilter = loginFilter;
+        this.isLoginFilter = isLoginFilter;
         this.webFilter = webFilter;
+        this.cacheFilter = cacheFilter;
     }
 
 
@@ -39,7 +46,17 @@ public class FilterLoginConfiguration {
         registration.addUrlPatterns("/login");
 
         registration.setName("loginFilter");
-        registration.setOrder(1); // 值越小，Filter越靠前。
+        registration.setOrder(4); // 值越小，Filter越靠前。
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean FilterisLoginConfiguration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(isLoginFilter);
+
+        registration.setName("isLoginFilter");
+        registration.setOrder(5); // 值越小，Filter越靠前。
         return registration;
     }
 
@@ -49,10 +66,28 @@ public class FilterLoginConfiguration {
         registration.setFilter(webFilter);
 
         registration.addUrlPatterns("/index");
-        registration.addUrlPatterns("/index.html");
 
         registration.setName("webFilter");
-        registration.setOrder(5); // 值越小，Filter越靠前。
+        registration.setOrder(10); // 值越小，Filter越靠前。
+        return registration;
+    }
+
+    /**
+     * 使用拦截器实现禁用浏览器缓存功能
+     */
+    @Bean
+    public FilterRegistrationBean FilterCacheConfiguration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(cacheFilter);
+
+        /*
+         * 在访问login,login.html页面取消浏览器缓存功能
+         * 也可以用/* 通配符
+         */
+        registration.addUrlPatterns("/login");
+
+        registration.setName("cacheFilter");
+        registration.setOrder(15); // 值越小，Filter越靠前。
         return registration;
     }
 }

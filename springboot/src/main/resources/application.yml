@@ -6,9 +6,9 @@ server:
 # spring.profiles.active是用来激活springboot多文件配置的
 # 在springboot中多环境配置文件名需要满足application-xxx.properties的命名规则；
 # 其中的xxx正是我们spring.profiles.active需要指定的配置文件名
-spring:
-  profiles:
-    active: pro
+#spring:
+#  profiles:
+#    active: pro
 #    active: test
 
 # logback 配置

@@ -33,6 +33,8 @@ public class LoggerController {
     public String loggerTest () {
         log.debug("hello debug!");
         log.info("hello logger!");
+        log.warn("hello warn!");
+        log.error("hello error");
         return "Logger";
     }
 

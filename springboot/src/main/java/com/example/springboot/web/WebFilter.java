@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.sun.tools.doclint.Entity.and;
+
 /**
  * @ClassName: WebFilter
  * @Description:
@@ -27,14 +29,19 @@ public class WebFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        Cookie[] cookies = request.getCookies();
         HttpSession session = request.getSession();
-
         UserEntity userEntity = (UserEntity) session.getAttribute("userEntity");
+
         if (userEntity!=null){
-            chain.doFilter(request,response);
+            if (userEntity.getUserName() != null & userEntity.getPassWord() != null & userEntity.getUserName().equals("user") & userEntity.getPassWord().equals("pass")){
+                // 登陆则跳转指定路径
+                // 127.0.0.1:80/logger1
+                response.sendRedirect(request.getContextPath()+"/main");
+                chain.doFilter(request,response);
+            }
         }else {
             System.out.println("sorry this userEntity is null");
+            chain.doFilter(request,response);
         }
     }
 
