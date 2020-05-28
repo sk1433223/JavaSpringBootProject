@@ -23,6 +23,7 @@ public class FileController {
 
     /**
      * 文件页面
+     *
      * @return
      */
     @GetMapping("fileIndex.html")
@@ -33,26 +34,28 @@ public class FileController {
 
     /**
      * 文件上传
+     *
      * @param file
      * @return
      */
     @PostMapping("uploadFile")
     @ResponseBody
-    public String uploadFile(@RequestParam("fileName") MultipartFile file){
-        System.out.println("文件大小:"+file.getSize()/(1024*1024)+"MB");
+    public String uploadFile(@RequestParam("fileName") MultipartFile file) {
+        System.out.println("文件大小:" + file.getSize() / (1024 * 1024) + "MB");
         boolean b = fileUpload1(file);
-        return b+"";
+        return b + "";
     }
 
     /**
      * 文件下载
+     *
      * @param response
      * @return
      */
     @RequestMapping("download")
     public String download1(HttpServletResponse response) {
         String filename = "2.txt";
-        fileDownLoad1(response,filename);
+        fileDownLoad1(response, filename);
         return null;
     }
 

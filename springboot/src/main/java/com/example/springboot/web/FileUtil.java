@@ -1,5 +1,6 @@
 package com.example.springboot.web;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import java.io.*;
  * @Author: 阿康
  * @DateTime: 2020/4/2411:04
  */
+@Component
 public class FileUtil {
 
     /**
