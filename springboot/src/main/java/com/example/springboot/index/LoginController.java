@@ -27,12 +27,13 @@ public class LoginController {
 
     /**
      * login信息提交
+     *
      * @param userEntity
      * @return
      */
     @PostMapping(value = "loginCommit")
     public String login(UserEntity userEntity, HttpSession session) {
-        if (userEntity != null){
+        if (userEntity != null) {
             if (userEntity.getUserName().equals("") | userEntity.getUserName() == null) {
                 return "login";
             }
@@ -52,8 +53,17 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping(value = {"test"})
+    public String demoLogin(UserEntity user) {
+        if (user.getUserName().equals("user") & user.getPassWord().equals("pass")) {
+            return "index";
+        }
+        return "login";
+    }
+
+
     @GetMapping("loginOut")
-    public String loginOut (HttpServletRequest request) {
+    public String loginOut(HttpServletRequest request) {
         request.getSession().removeAttribute("userEntity");
         return "login";
     }

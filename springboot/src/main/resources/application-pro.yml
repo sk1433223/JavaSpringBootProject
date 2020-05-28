@@ -31,7 +31,7 @@ spring:
   #数据库连接池
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: org.gjt.mm.mysql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/springbootdb?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
@@ -41,7 +41,18 @@ spring:
       initial-size: 5     #初始化提供的连接数
       max-total: 5          #最大的连接数
       max-wait-millis: 200        #等待连接获取的最大超时时间
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format sql: true #格式化SQL,如果不加,SQL输出不换行,不方便查看
 
 #mybatis:
-#  mapper-locations: classpath:mapper/*Mapper.xml
-#  type-aliases-package: com.example.Model
+#  mybatis.mapper-locations=classpath:mybatis/mapper/*.xml
+#  mybatis.config-location=classpath:mybatis/mybatis-config.xml
+#mybatis:
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+#  config-location: classpath:mybatis/mybatis-config.xml
+

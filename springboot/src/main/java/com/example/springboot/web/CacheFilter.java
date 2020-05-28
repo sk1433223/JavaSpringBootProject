@@ -11,8 +11,8 @@ import java.io.IOException;
 /**
  * Filter禁用浏览器缓存
  */
-@Component
 @Slf4j
+@Component
 public class CacheFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
@@ -21,10 +21,10 @@ public class CacheFilter implements Filter {
 
         //  (Filter禁用浏览器缓存)
         //  在response的头部设置Cache-Control、Pragma 和 Expires 即可取消缓存
-        response.setHeader("Cache-Control","no-cache");
-        response.setHeader("Pragma","no-cache");
-        response.setHeader("Expires","-1");
-        log.info("info:"+this.getClass().getName());
-        chain.doFilter(request,response);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "-1");
+        log.info("info:" + this.getClass().getName());
+        chain.doFilter(request, response);
     }
 }

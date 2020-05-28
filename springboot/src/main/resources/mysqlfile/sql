@@ -7,3 +7,7 @@ CREATE TABLE `springbootdb`.`user`(
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB CHARSET=utf8 COLLATE=utf8_bin;
 
+INSERT INTO `user`(id,user_name,pass_word,STATUS) VALUES (1,'admin','123','1');
+
+SELECT * FROM `user`;
+

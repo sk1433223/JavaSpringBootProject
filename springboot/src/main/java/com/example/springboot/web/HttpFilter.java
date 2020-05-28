@@ -27,11 +27,12 @@ public class HttpFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        doFilter((HttpServletRequest)request,(HttpServletResponse)response,chain);
+        doFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
     }
 
     /**
      * 这个doFilter,是提供给子类覆盖的方法
+     *
      * @param request
      * @param response
      * @param chain

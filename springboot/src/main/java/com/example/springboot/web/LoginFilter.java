@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -16,8 +17,8 @@ import java.io.IOException;
  * @Author: 阿康
  * @DateTime: 2020/5/1517:06
  */
-@Component
 @Slf4j
+@Component
 public class LoginFilter implements Filter {
 
     @Override
@@ -27,27 +28,19 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        System.out.println("doFilter");
         System.out.println("login,login.html拦截");
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        String path = request.getContextPath();
         Cookie[] cookies = request.getCookies();
-
-
+        HttpSession session = request.getSession();
+        // http://localhost/login
         StringBuffer url = request.getRequestURL();
 
-        System.out.println(url+"::"+path);
-
-        if (url!=null){
-            /**
-             * 放行 chain.doFilter(request,response);
-             */
-            chain.doFilter(request,response);
-        }else {
-            System.out.println("ErrorChain!");
-        }
+        /**
+         * 放行 chain.doFilter(request,response);
+         */
+        chain.doFilter(request, response);
 
     }
 

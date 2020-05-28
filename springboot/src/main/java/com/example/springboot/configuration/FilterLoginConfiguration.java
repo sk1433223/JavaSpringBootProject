@@ -3,14 +3,14 @@ package com.example.springboot.configuration;
 import com.example.springboot.web.CacheFilter;
 import com.example.springboot.web.IsLoginFilter;
 import com.example.springboot.web.LoginFilter;
-import com.example.springboot.web.WebFilter;
+import com.example.springboot.web.WebFilters;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @ClassName: FilterConfiguration
- * @Description:
+ * @Description: 自定义拦截
  * @Author: 阿康
  * @DateTime: 2020/5/169:28
  */
@@ -21,17 +21,16 @@ public class FilterLoginConfiguration {
 
     private final IsLoginFilter isLoginFilter;
 
-    private final WebFilter webFilter;
+    private final WebFilters webFilter;
 
     private final CacheFilter cacheFilter;
 
-    public FilterLoginConfiguration(LoginFilter loginFilter,IsLoginFilter isLoginFilter, WebFilter webFilter,CacheFilter cacheFilter) {
+    public FilterLoginConfiguration(LoginFilter loginFilter, IsLoginFilter isLoginFilter, WebFilters webFilter, CacheFilter cacheFilter) {
         this.loginFilter = loginFilter;
         this.isLoginFilter = isLoginFilter;
         this.webFilter = webFilter;
         this.cacheFilter = cacheFilter;
     }
-
 
 
     /**
@@ -46,7 +45,7 @@ public class FilterLoginConfiguration {
         registration.addUrlPatterns("/login");
 
         registration.setName("loginFilter");
-        registration.setOrder(4); // 值越小，Filter越靠前。
+        registration.setOrder(3); // 值越小，Filter越靠前。
         return registration;
     }
 

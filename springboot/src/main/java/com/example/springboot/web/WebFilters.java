@@ -20,7 +20,7 @@ import static com.sun.tools.doclint.Entity.and;
  * @DateTime: 2020/5/1610:27
  */
 @Component
-public class WebFilter implements Filter {
+public class WebFilters implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
@@ -32,16 +32,16 @@ public class WebFilter implements Filter {
         HttpSession session = request.getSession();
         UserEntity userEntity = (UserEntity) session.getAttribute("userEntity");
 
-        if (userEntity!=null){
-            if (userEntity.getUserName() != null & userEntity.getPassWord() != null & userEntity.getUserName().equals("user") & userEntity.getPassWord().equals("pass")){
+        if (userEntity != null) {
+            if (userEntity.getUserName() != null & userEntity.getPassWord() != null & userEntity.getUserName().equals("user") & userEntity.getPassWord().equals("pass")) {
                 // 登陆则跳转指定路径
                 // 127.0.0.1:80/logger1
-                response.sendRedirect(request.getContextPath()+"/main");
-                chain.doFilter(request,response);
+                response.sendRedirect(request.getContextPath() + "/main");
+                chain.doFilter(request, response);
             }
-        }else {
+        } else {
             System.out.println("sorry this userEntity is null");
-            chain.doFilter(request,response);
+            chain.doFilter(request, response);
         }
     }
 

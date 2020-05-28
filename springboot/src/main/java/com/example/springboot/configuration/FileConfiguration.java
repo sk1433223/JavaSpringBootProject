@@ -18,6 +18,7 @@ public class FileConfiguration {
 
     /**
      * 上传文件大小
+     *
      * @return
      */
     @Bean

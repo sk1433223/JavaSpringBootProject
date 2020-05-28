@@ -15,11 +15,12 @@ public class FileUtil {
 
     /**
      * 文件上传封装
+     *
      * @param file
      * @return
      */
     public static boolean fileUpload1(MultipartFile file) {
-        if (file.isEmpty()){
+        if (file.isEmpty()) {
             return false;
         }
         String path = "F:/test";
@@ -29,7 +30,7 @@ public class FileUtil {
         String suffix = filename.substring(filename.lastIndexOf("."));  // 扩展名
         System.out.println("prefix:"+prefix);
         System.out.println("suffix:"+suffix);*/
-        File dest = new File(path+"/"+filename);
+        File dest = new File(path + "/" + filename);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdir();
         }
@@ -49,10 +50,11 @@ public class FileUtil {
 
     /**
      * 五位随机数
+     *
      * @return
      */
     public static int number() {
-        int num = (int) ((Math.random()*9+1)*10000);
+        int num = (int) ((Math.random() * 9 + 1) * 10000);
         System.out.println(num);
         return num;
     }
@@ -60,17 +62,18 @@ public class FileUtil {
 
     /**
      * 文件下载
+     *
      * @param response
      * @param strFileName
      */
-    public static String fileDownLoad1(HttpServletResponse response,String strFileName) {
+    public static String fileDownLoad1(HttpServletResponse response, String strFileName) {
         String path = "F:/test";
-        File file = new File(path+"/"+strFileName);
-        if (file.exists()){
+        File file = new File(path + "/" + strFileName);
+        if (file.exists()) {
             response.setContentType("application/vnd.ms-excel;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             try {
-                response.setHeader("Content-Disposition", "attachment;fileName="+java.net.URLEncoder.encode(strFileName,"UTF-8"));
+                response.setHeader("Content-Disposition", "attachment;fileName=" + java.net.URLEncoder.encode(strFileName, "UTF-8"));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
                 return "false";
@@ -84,7 +87,7 @@ public class FileUtil {
                 fis = new FileInputStream(file);
                 bis = new BufferedInputStream(fis);
                 int i = bis.read(buffer);
-                while(i != -1){
+                while (i != -1) {
                     os.write(buffer);
                     i = bis.read(buffer);
                 }

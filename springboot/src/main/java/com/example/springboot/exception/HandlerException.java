@@ -13,24 +13,29 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class HandlerException {
 
+    /**
+     * 空指针异常
+     */
     @ExceptionHandler(value = {java.lang.NullPointerException.class})
     public ModelAndView testExceptionHandler(Exception e) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("exception",e);
-        modelAndView.setViewName("error1");
+        modelAndView.addObject("exception", e);
+        modelAndView.setViewName("error/error1");
         return modelAndView;
     }
 
     /**
      * 数学异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(value = {java.lang.ArithmeticException.class})
     public ModelAndView testExceptionHandler2(Exception e) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("exception",e);
-        modelAndView.setViewName("error2");
+        modelAndView.addObject("exception", e);
+        // 跳转指定路径页面
+        modelAndView.setViewName("error/error2");
         return modelAndView;
     }
 

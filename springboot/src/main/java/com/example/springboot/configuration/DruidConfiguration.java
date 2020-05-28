@@ -13,7 +13,8 @@ import javax.sql.DataSource;
 
 /**
  * @ClassName: DruidConfiguration
- * @Description: http://localhost:80/druid/login.html
+ * @Description: 自己创建配置类来创建数据源对象
+ * @Url http://localhost:80/druid/login.html
  * @Author: 阿康
  * @DateTime: 2020/5/1614:40
  */
@@ -22,6 +23,7 @@ public class DruidConfiguration {
 
     /**
      * 实现web监控的配置处理
+     * 配置后台的Servlet
      */
     @Bean
     public ServletRegistrationBean druidServlet() {
@@ -35,12 +37,15 @@ public class DruidConfiguration {
         return servletRegistrationBean;
     }
 
+    /**
+     * 配置Web监控的拦截器Filter
+     */
     @Bean
-    public FilterRegistrationBean filterRegistrationBean(){
-        FilterRegistrationBean filterRegistrationBean=new FilterRegistrationBean();
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");//所有请求进行监控处理
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.css,/druid/*");//排除
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,/druid/*,*.ico");//排除
         return filterRegistrationBean;
     }
 

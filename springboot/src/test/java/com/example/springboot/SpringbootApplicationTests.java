@@ -2,7 +2,7 @@ package com.example.springboot;
 
 import com.example.springboot.mapper.UserMapper;
 import com.example.springboot.model.UserEntity;
-import lombok.Data;
+import com.example.springboot.model.jpahibernate.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,36 @@ import java.sql.SQLException;
 @Slf4j
 class SpringbootApplicationTests {
 
-    @Autowired
-    UserMapper userMapper;
 
     @Autowired
     DataSource dataSource;
 
+    //@Autowired
+    //UserDao userDao;
+
+
+    @Autowired
+    UserMapper userMapper;
+
     @Test
     void contextLoads() throws SQLException {
         Connection connection = dataSource.getConnection();
-        System.out.println(connection);
-
+        System.out.println(connection.getClass());
+        connection.close();
     }
+
+    @Test
+    public void getUserByIdTest() {
+        UserEntity userById = userMapper.getUserById(1);
+        System.out.println(
+                userById
+        );
+    }
+
+    @Test
+    public void getUser() {
+        //System.out.println(userDao.getUserById(1));
+    }
+
 
 }
