@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * @ClassName: LoginController
- * @Description:
- * @Author: 阿康
+ * @ClassName LoginController
+ * @description:
+ * @author 阿康
  * @DateTime: 2020/5/1517:08
  */
 
@@ -27,9 +27,6 @@ public class LoginController {
 
     /**
      * login信息提交
-     *
-     * @param userEntity
-     * @return
      */
     @PostMapping(value = "loginCommit")
     public String login(UserEntity userEntity, HttpSession session) {
@@ -44,7 +41,6 @@ public class LoginController {
             String passWord = userEntity.getPassWord();
             if (userName.equals("user") & passWord.equals("pass")) {
                 session.setAttribute("userEntity", userEntity);
-
                 return "success";
             } else {
                 return "login";

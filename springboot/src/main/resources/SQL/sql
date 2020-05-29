@@ -1,0 +1,71 @@
+/* MySql (SQLyog)*/
+/* 创建springbootdb数据库并指定字符集编码 */
+CREATE DATABASE `springbootdb`CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+-- springbootdb
+/* 创建user表和字段 */
+CREATE TABLE `springbootdb`.`user`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(50) NOT NULL,
+  `pass_word` VARCHAR(50) NOT NULL,
+  `status` VARCHAR(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+INSERT INTO `user`(id,user_name,pass_word,`status`) VALUES (1,'admin','123','1');
+INSERT INTO `user`(id,user_name,pass_word,`status`) VALUES (3,'user','123','1');
+INSERT INTO `user`(id,user_name,pass_word,`status`) VALUES (5,'123','123','1');
+
+SELECT * FROM `user`;
+
+
+/** 创建一个tb_user表*/
+CREATE TABLE `springbootdb`.`tb_user`(
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '主键标识',
+  `user_name` VARCHAR(255) NOT NULL COMMENT '用户名',
+  `pass_word` VARCHAR(255) NOT NULL COMMENT '密码',
+  `id_card` VARCHAR(255) COMMENT '身份证',
+  `sex` VARCHAR(10) DEFAULT '男'  COMMENT '性别',
+  `email` VARCHAR(255) COMMENT '邮箱',
+  `create_data` DATETIME COMMENT '修改时间',
+  `status` VARCHAR(1) DEFAULT '1'  COMMENT '状态值(1正常,0异常,其他未知)',
+  `reserve` VARCHAR(255) COMMENT '预留字段',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `UNIQUE_EMAIL` (`email`),
+  UNIQUE INDEX `UNIQUE_USER_NAME` (`user_name`)
+) ENGINE=INNODB CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+COMMENT='这是一个用户信息表(测试)' ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `tb_user` (`id`, `user_name`, `pass_word`, `id_card`, `sex`, `email`, `create_data`, `status`, `reserve`)
+VALUES (11, 'admin', '123', '61243017970406193X', '男', 'sk1422@qq.com', NOW(), '1', NULL);
+
+UPDATE tb_user SET sex = '女' WHERE id = 11;
+
+DELETE FROM tb_user WHERE id = 11;
+
+-- 从0开始往后取出5条记录
+SELECT * FROM `tb_user` limit 0,5;
+
+/* 索引 (MySql)*/
+-- 普通索引 (INDEX)
+/*
+ *普通索引（由关键字KEY或INDEX定义的索引）的唯一任务是加快对数据的访问速度。
+ *因此，应该只为那些最经常出现在查询条件（WHERE column=）或排序条件（ORDER BY column）中的数据列创建索引。
+ */
+-- ALTER TABLE `表名` ADD INDEX `索引名` ( `索引列明` );
+-- 主键索引 (PRIMARY KEY)
+-- 唯一索引 (UNIQUE)
+-- ALTER TABLE `table_name` ADD UNIQUE ( `column` )
+ALTER TABLE `tb_user` ADD INDEX INDEX_ID_CARD ( `id_card` );
+
+ALTER TABLE `tb_user` ADD UNIQUE `INDEX_ID_CARD` ( `id_card` )
+
+-- 组合索引 (指多个字段上创建的索引，只有在查询条件中使用了创建索引时的第一个字段，索引才会被使用。使用组合索引时遵循最左前缀集合。)
+ALTER TABLE `tb_user` ADD INDEX `INDEX_TB_USER_ID_NAME` (`id`,`name`);
+
+-- 全文索引 (FULLTEXT 索引跟其它索引大不相同，它更像是一个搜索引擎，而不是简单的where语句的参数匹配。目前只有char、varchar，text 列上可以创建全文索引。)
+-- ALTER TABLE `tb_user` ADD FULLTEXT `INDEX_FULLTEXT_ID_CARD` (`id_card`);
+-- CREATE FULLTEXT INDEX index_full_id_card ON tb_user(`id_card`);
+-- 修改表结构
+ALTER TABLE `tb_user` ADD FULLTEXT `INDEX_FULLTEXT_ID_CARD` (`id_card`);
+-- 建表后，直接创建索引
+CREATE FULLTEXT INDEX `INDEX_FULLTEXT_ID_CARD` ON tb_user(`id_card`);

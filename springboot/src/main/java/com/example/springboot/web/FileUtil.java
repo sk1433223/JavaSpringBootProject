@@ -18,8 +18,7 @@ public class FileUtil {
     /**
      * 文件上传封装
      *
-     * @param file
-     * @return
+     * @param file 上传文件
      */
     public static boolean fileUpload1(MultipartFile file) {
         if (file.isEmpty()) {
@@ -52,8 +51,6 @@ public class FileUtil {
 
     /**
      * 五位随机数
-     *
-     * @return
      */
     public static int number() {
         int num = (int) ((Math.random() * 9 + 1) * 10000);
@@ -65,8 +62,8 @@ public class FileUtil {
     /**
      * 文件下载
      *
-     * @param response
-     * @param strFileName
+     * @param response 响应
+     * @param strFileName 文件名
      */
     public static String fileDownLoad1(HttpServletResponse response, String strFileName) {
         String path = "F:/test";
@@ -81,9 +78,9 @@ public class FileUtil {
                 return "false";
             }
             byte[] buffer = new byte[1024];
-            FileInputStream fis = null; //文件输入流
-            BufferedInputStream bis = null;
-            OutputStream os = null; //输出流
+            FileInputStream fis; //文件输入流
+            BufferedInputStream bis;
+            OutputStream os; //输出流
             try {
                 os = response.getOutputStream();
                 fis = new FileInputStream(file);
