@@ -1,5 +1,7 @@
 package com.example.springboot.web;
 
+import org.springframework.stereotype.Component;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,7 +9,7 @@ import java.util.regex.Pattern;
  * @author 阿康
  * @date 2020/5/29
  */
-
+@Component
 public class MatchedUtil {
 
     public static void main(String[] args) {
@@ -27,8 +29,9 @@ public class MatchedUtil {
      * @param email 邮箱
      */
     public static boolean matchedEmailUtils(String email) {
-        if (email == null)
+        if (email == null) {
             return false;
+        }
         String rule = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
         Pattern pattern;
         Matcher matcher;

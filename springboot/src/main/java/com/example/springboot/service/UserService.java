@@ -1,15 +1,14 @@
-package com.example.springboot.mapper;
+package com.example.springboot.service;
 
 import com.example.springboot.model.UserEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 阿康
+ * @ClassName: UserService
+ * @description:
+ * @date 2020/5/29
  */
-
-@Repository
-public interface UserMapper {
+public interface UserService {
 
     /**
      * 根据主键查询对象信息

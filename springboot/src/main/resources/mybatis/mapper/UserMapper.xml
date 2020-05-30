@@ -3,7 +3,11 @@
 <mapper namespace="com.example.springboot.mapper.UserMapper">
 
     <select id="getUserById" resultType="com.example.springboot.model.UserEntity">
-        select * from `user` u where u.id=#{id}
+        select * from `user` u where u.id=#{id} limit 1
+    </select>
+
+    <select id="getUserByUserName" resultType="com.example.springboot.model.UserEntity">
+        select * from `user` u where u.user_name=#{userName} limit 1
     </select>
 
 </mapper>

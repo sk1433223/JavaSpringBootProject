@@ -1,5 +1,5 @@
-server:
-  port: 80
+#server:
+#  port: 80
 
     # 加载环境切换文件
     # spring.profiles.active是用来激活springboot多文件配置的

@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author 阿康
+ */
 public class HttpFilter implements Filter {
 
     private FilterConfig filterConfig;

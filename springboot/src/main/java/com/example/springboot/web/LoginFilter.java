@@ -1,6 +1,5 @@
 package com.example.springboot.web;
 
-import com.example.springboot.model.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,8 @@ import java.io.IOException;
 
 /**
  * @ClassName: LoginFilter
- * @Description:
- * @Author: 阿康
+ * @description:
+ * @author 阿康
  * @DateTime: 2020/5/1517:06
  */
 @Slf4j
@@ -37,9 +36,7 @@ public class LoginFilter implements Filter {
         // http://localhost/login
         StringBuffer url = request.getRequestURL();
 
-        /**
-         * 放行 chain.doFilter(request,response);
-         */
+        /* 放行 chain.doFilter(request,response) */
         chain.doFilter(request, response);
 
     }

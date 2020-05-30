@@ -31,12 +31,11 @@ class SpringbootApplicationTests {
     void contextLoads() throws SQLException {
         Connection connection = dataSource.getConnection();
         System.out.println(connection.getClass());
-        connection.close();
     }
 
     @Test
     public void getUserByIdTest() {
-        UserEntity userById = userMapper.getUserById(1);
+        UserEntity userById = userMapper.getUserByUserName("admin");
         System.out.println(
                 userById
         );

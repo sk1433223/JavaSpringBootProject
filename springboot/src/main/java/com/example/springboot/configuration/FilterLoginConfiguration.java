@@ -45,7 +45,8 @@ public class FilterLoginConfiguration {
         registration.addUrlPatterns("/login");
 
         registration.setName("loginFilter");
-        registration.setOrder(3); // 值越小，Filter越靠前。
+        // 值越小，Filter越靠前。
+        registration.setOrder(3);
         return registration;
     }
 
@@ -55,7 +56,8 @@ public class FilterLoginConfiguration {
         registration.setFilter(isLoginFilter);
 
         registration.setName("isLoginFilter");
-        registration.setOrder(5); // 值越小，Filter越靠前。
+        // 值越小，Filter越靠前。
+        registration.setOrder(5);
         return registration;
     }
 
@@ -67,7 +69,8 @@ public class FilterLoginConfiguration {
         registration.addUrlPatterns("/index");
 
         registration.setName("webFilter");
-        registration.setOrder(10); // 值越小，Filter越靠前。
+        // 值越小，Filter越靠前。
+        registration.setOrder(10);
         return registration;
     }
 
@@ -86,7 +89,8 @@ public class FilterLoginConfiguration {
         registration.addUrlPatterns("/login");
 
         registration.setName("cacheFilter");
-        registration.setOrder(15); // 值越小，Filter越靠前。
+        // 值越小，Filter越靠前。
+        registration.setOrder(15);
         return registration;
     }
 }
